@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 200" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Vivaan Martech horizontal lockup</title>
+  <defs><linearGradient id="sun" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5851E1"/><stop offset="1" stop-color="#0EA5E9"/></linearGradient></defs>
+  <circle cx="100" cy="30" r="20" fill="url(#sun)"/>
+  <polygon points="30,58 100,190 170,58 136,58 100,126 64,58" fill="#0A2540"/>
+  <text x="208" y="122" font-size="76" font-weight="700" letter-spacing="-2" fill="#0A2540">vivaan</text>
+  <text x="212" y="158" font-size="22" font-weight="500" letter-spacing="11" fill="#425466">MARTECH</text>
+</svg>
