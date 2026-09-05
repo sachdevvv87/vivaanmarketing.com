@@ -211,10 +211,17 @@ somewhere they already trust. In rough order of leverage for this category:
 
 Do these in order once the domain resolves.
 
-- [ ] Register or point `vivaanmarketing.com`, confirm HTTPS and that the non-www and www
-      variants resolve to one canonical host.
-- [ ] Google Search Console: verify the domain property, submit `sitemap.xml`, request
-      indexing on `/`, `/services/`, both wedge service pages and the audit page.
+- [x] **Done 5 Sep 2026.** Domain registered at Wix, DNS repointed to GitHub Pages
+      (four apex A records plus a www CNAME). Site live and serving 200 on every route.
+- [ ] HTTPS: GitHub is provisioning the certificate. Once issued, enable Enforce HTTPS
+      so `http` 301s to `https`.
+- [x] **Done 5 Sep 2026.** Google Search Console domain property `vivaanmarketing.com`
+      verified via DNS TXT (auto verified, method: domain name provider). Sitemap
+      submitted, status Success, 12 pages discovered.
+- [ ] Resubmit the sitemap as `https://vivaanmarketing.com/sitemap.xml` after HTTPS is
+      enforced, then remove the `http` entry. The `http` one keeps working via the
+      redirect in the meantime, so this is tidying rather than urgent.
+- [ ] Request indexing on `/`, `/services/`, both wedge service pages and the audit page.
 - [ ] Bing Webmaster Tools: verify and submit the same sitemap. Bing feeds Copilot and
       is materially cheaper to rank in than Google.
 - [ ] Run PageSpeed Insights on the home page and one service page. Record the baseline.
