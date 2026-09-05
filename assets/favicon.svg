@@ -1,9 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <style>
-    .v { fill: #0A2540; }
-    @media (prefers-color-scheme: dark) { .v { fill: #F2F5F9; } }
-  </style>
-  <defs><linearGradient id="sun" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5851E1"/><stop offset="1" stop-color="#0EA5E9"/></linearGradient></defs>
-  <circle cx="100" cy="30" r="20" fill="url(#sun)"/>
-  <polygon class="v" points="30,58 100,190 170,58 136,58 100,126 64,58"/>
+  <title>Vivaan Marketing</title>
+  <defs>
+    <linearGradient id="fL" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0" stop-color="#35B8EC"/><stop offset="1" stop-color="#1878CE"/>
+    </linearGradient>
+    <linearGradient id="fR" x1="1" y1="0" x2="0.2" y2="1">
+      <stop offset="0" stop-color="#2A5FC4"/><stop offset="1" stop-color="#112C6F"/>
+    </linearGradient>
+  </defs>
+  <path d="M16 24 L58 24 L100 106 L100 180 Z" fill="url(#fL)"/>
+  <path d="M184 24 L142 24 L100 106 L100 180 Z" fill="url(#fR)"/>
+  <circle cx="60" cy="62" r="11" fill="#fff"/>
+  <path d="M46 98c0-11.6 6.2-21 14-21s14 9.4 14 21z" fill="#fff"/>
 </svg>

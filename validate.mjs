@@ -97,7 +97,7 @@ for (const f of files) {
 }
 
 // --- assets exist ---
-for (const a of ["assets/site.css", "assets/fonts/inter-latin.woff2", "assets/favicon.svg", "assets/social-card.png", "assets/logo.svg"]) {
+for (const a of ["assets/site.css", "assets/fonts/inter-latin.woff2", "assets/favicon.svg", "assets/social-card.jpg", "assets/logo.svg"]) {
   try {
     await stat(join(ROOT, a));
   } catch {

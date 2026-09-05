@@ -60,13 +60,28 @@ export function icon(name) {
   );
 }
 
+// The mark: a V split into a cyan-blue arm carrying a person and a deep navy
+// arm carrying a circuit. Gradient ids are suffixed per instance because the
+// same mark is inlined more than once per page.
 function logoSvg(id) {
+  const L = id + "L", R = id + "R";
   return (
-    '<svg viewBox="0 0 200 200" width="30" height="30" aria-hidden="true" focusable="false">' +
-    '<defs><linearGradient id="' + id + '" x1="0" y1="0" x2="1" y2="1">' +
-    '<stop offset="0" stop-color="#5851E1"/><stop offset="1" stop-color="#0EA5E9"/></linearGradient></defs>' +
-    '<circle cx="100" cy="30" r="20" fill="url(#' + id + ')"/>' +
-    '<polygon class="mark-v" points="30,58 100,190 170,58 136,58 100,126 64,58"/></svg>'
+    '<svg viewBox="0 0 200 200" width="32" height="32" aria-hidden="true" focusable="false">' +
+    "<defs>" +
+    '<linearGradient id="' + L + '" x1="0" y1="0" x2="0.7" y2="1">' +
+    '<stop offset="0" stop-color="#35B8EC"/><stop offset="1" stop-color="#1878CE"/></linearGradient>' +
+    '<linearGradient id="' + R + '" x1="1" y1="0" x2="0.2" y2="1">' +
+    '<stop offset="0" stop-color="#2A5FC4"/><stop offset="1" stop-color="#112C6F"/></linearGradient>' +
+    "</defs>" +
+    '<path d="M30 34 L66 34 L100 110 L100 174 Z" fill="url(#' + L + ')"/>' +
+    '<path d="M170 34 L134 34 L100 110 L100 174 Z" fill="url(#' + R + ')"/>' +
+    '<circle cx="68" cy="66" r="9" fill="#fff"/>' +
+    '<path d="M57 97c0-9.4 4.9-17 11-17s11 7.6 11 17z" fill="#fff"/>' +
+    '<g stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round">' +
+    '<path d="M140 58 126 84M126 84 114 110M126 84 146 74"/></g>' +
+    '<g fill="#fff"><circle cx="140" cy="58" r="4.6"/><circle cx="126" cy="84" r="4.6"/>' +
+    '<circle cx="146" cy="74" r="3.4"/><circle cx="114" cy="110" r="4"/></g>' +
+    "</svg>"
   );
 }
 
@@ -82,7 +97,7 @@ function nav(active) {
     '<div class="nav-inner" id="navInner">' +
     '<a class="brand" href="/" aria-label="' + BRAND + ' home">' +
     logoSvg("navGrad") +
-    '<span><span class="word">vivaan</span><span class="desc">MARKETING</span></span>' +
+    '<span><span class="word">VIVAAN</span><span class="desc">MARKETING</span></span>' +
     "</a>" +
     '<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu" id="navToggle">' +
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
@@ -114,7 +129,8 @@ function footer() {
     "<div>" +
     '<a class="brand" href="/" aria-label="' + BRAND + ' home">' +
     logoSvg("footGrad") +
-    '<span><span class="word">vivaan</span><span class="desc">MARKETING</span></span></a>' +
+    '<span><span class="word">VIVAAN</span><span class="desc">MARKETING</span></span></a>' +
+    '<p class="foot-tag">Marketing starts with people.</p>' +
     '<p class="foot-blurb">B2B SaaS marketing built for the era when buyers ask an AI before they open a search tab.</p>' +
     "</div>" +
     "<div><h4>Services</h4><ul>" + svc + "</ul></div>" +
@@ -199,7 +215,7 @@ function orgNode() {
     alternateName: "Vivaan Martech",
     url: SITE + "/",
     logo: { "@type": "ImageObject", url: SITE + "/assets/logo.svg" },
-    image: SITE + "/assets/social-card.png",
+    image: SITE + "/assets/social-card.jpg",
     email: EMAIL,
     description:
       "B2B SaaS marketing agency specialising in AI search visibility. We make brands the source that ChatGPT, Google AI Overviews, Perplexity, Gemini and Claude cite, and back it with SEO, content and LinkedIn programmes.",
@@ -288,19 +304,21 @@ export function render(page) {
     '<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>\n' +
     '<link rel="stylesheet" href="/assets/site.css">\n' +
     '<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">\n' +
-    '<meta name="theme-color" content="#5851E1">\n' +
+    '<meta name="theme-color" content="#1878CE">\n' +
     '<meta property="og:site_name" content="' + BRAND + '">\n' +
     '<meta property="og:title" content="' + page.title + '">\n' +
     '<meta property="og:description" content="' + page.description + '">\n' +
     '<meta property="og:type" content="' + (page.og || "website") + '">\n' +
     '<meta property="og:url" content="' + url + '">\n' +
-    '<meta property="og:image" content="' + SITE + '/assets/social-card.png">\n' +
+    '<meta property="og:image" content="' + SITE + '/assets/social-card.jpg">\n' +
+    '<meta property="og:image:type" content="image/jpeg">\n' +
     '<meta property="og:image:width" content="1200">\n' +
     '<meta property="og:image:height" content="630">\n' +
+    '<meta property="og:image:alt" content="Vivaan Marketing: your buyers ask AI first, make sure it names you">\n' +
     '<meta name="twitter:card" content="summary_large_image">\n' +
     '<meta name="twitter:title" content="' + page.title + '">\n' +
     '<meta name="twitter:description" content="' + page.description + '">\n' +
-    '<meta name="twitter:image" content="' + SITE + '/assets/social-card.png">\n' +
+    '<meta name="twitter:image" content="' + SITE + '/assets/social-card.jpg">\n' +
     '<script type="application/ld+json">' + ld + "</script>\n" +
     "</head>\n<body>\n" +
     '<a class="skip" href="#main">Skip to content</a>\n' +

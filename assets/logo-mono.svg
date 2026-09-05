@@ -1,5 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <title>Vivaan Martech logo, monochrome ink</title>
-  <circle cx="100" cy="30" r="20" fill="#0A2540"/>
-  <polygon points="30,58 100,190 170,58 136,58 100,126 64,58" fill="#0A2540"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Vivaan Marketing logo">
+  <title>Vivaan Marketing, single colour</title>
+  <path d="M30 34 L66 34 L100 110 L100 174 Z" fill="#0F2A5F" opacity=".72"/>
+  <path d="M170 34 L134 34 L100 110 L100 174 Z" fill="#0F2A5F"/>
+  <circle cx="68" cy="66" r="9" fill="#fff"/>
+  <path d="M57 97c0-9.4 4.9-17 11-17s11 7.6 11 17z" fill="#fff"/>
+  <g stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round">
+    <path d="M140 58 126 84M126 84 114 110M126 84 146 74"/>
+  </g>
+  <g fill="#fff">
+    <circle cx="140" cy="58" r="4.6"/><circle cx="126" cy="84" r="4.6"/>
+    <circle cx="146" cy="74" r="3.4"/><circle cx="114" cy="110" r="4"/>
+  </g>
 </svg>

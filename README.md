@@ -29,6 +29,8 @@ because the next build overwrites it.
 | `validate.mjs` | Checks canonicals, internal links, JSON-LD, duplicate meta, copy rules, CWV smells. |
 | `assets/site.css` | The only stylesheet. One request, cached across all pages. |
 | `assets/fonts/` | Self-hosted Inter variable subset. Do not replace this with a Google Fonts link. |
+| `assets/logo.svg` | The V mark. `logo-mono.svg`, `logo-white.svg` and `favicon.svg` are variants. |
+| `assets/social-card.jpg` | 1200x630 share card, 71KB. Regenerate if the headline or brand changes. |
 | `SEO-PLAN.md` | Keyword map, AI search strategy, the 12-post blog plan, launch checklist. |
 
 ### To change copy
