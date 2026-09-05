@@ -278,6 +278,7 @@ const servicesFaqs = [
 
 const servicesHub = {
   path: "/services/",
+  trail: [HOME, { name: "Services", url: "/services/" }],
   title: "B2B SaaS Marketing Services | AEO, GEO, SEO and Content",
   description:
     "Six B2B SaaS marketing services under one strategy: AEO, GEO, SaaS SEO, content writing, content marketing and LinkedIn personal branding.",
@@ -361,6 +362,7 @@ const servicesHub = {
 function servicePage(cfg) {
   return {
     path: cfg.path,
+    trail: [HOME, SERVICES, { name: cfg.crumb, url: cfg.path }],
     title: cfg.title,
     description: cfg.description,
     schema: [
@@ -885,6 +887,7 @@ const auditFaqs = [
 
 const auditPage = {
   path: "/free-ai-visibility-audit/",
+  trail: [HOME, { name: "Free AI Visibility Audit", url: "/free-ai-visibility-audit/" }],
   title: "Free AI Visibility Audit | See If ChatGPT Cites Your Brand",
   description:
     "Free AI Visibility Audit for B2B SaaS. See which buyer questions cite competitors instead of you across ChatGPT, Perplexity and AI Overviews. No call.",
@@ -998,6 +1001,7 @@ const resultsFaqs = [
 
 const results = {
   path: "/results/",
+  trail: [HOME, { name: "Results", url: "/results/" }],
   title: "Results | B2B SaaS SEO, Content and AI Visibility Outcomes",
   description:
     "Real outcomes from B2B SaaS SEO, content and AI visibility work: 0 to 11 AI-cited keywords in six months, 3x blog traffic, 200K+ LinkedIn views.",
@@ -1064,6 +1068,7 @@ const aboutFaqs = [
 
 const about = {
   path: "/about/",
+  trail: [HOME, { name: "About", url: "/about/" }],
   title: "About Vivaan Marketing | B2B SaaS Marketing Agency",
   description:
     "Vivaan Marketing is a B2B SaaS marketing agency specialising in AI search visibility, SEO, content and LinkedIn. Six years in B2B tech, 50+ brands, 500+ articles shipped.",
@@ -1140,6 +1145,7 @@ const contactFaqs = [
 
 const contact = {
   path: "/contact/",
+  trail: [HOME, { name: "Contact", url: "/contact/" }],
   title: "Contact Vivaan Marketing | B2B SaaS Marketing Agency",
   description:
     "Contact Vivaan Marketing for B2B SaaS marketing, AI visibility, SEO, content and LinkedIn. Reply within one business day. No forms and no call required.",

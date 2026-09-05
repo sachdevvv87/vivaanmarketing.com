@@ -151,7 +151,7 @@ export function breadcrumbs(trail) {
   return '<div class="container"><div class="crumbs"><ol>' + items + "</ol></div></div>";
 }
 
-function crumbSchema(trail) {
+function crumbSchema(trail, selfPath) {
   if (!trail || trail.length < 2) return null;
   return {
     "@type": "BreadcrumbList",
@@ -159,7 +159,7 @@ function crumbSchema(trail) {
       "@type": "ListItem",
       position: i + 1,
       name: t.name,
-      item: SITE + t.url,
+      item: SITE + (t.url || selfPath),
     })),
   };
 }
@@ -266,7 +266,7 @@ export function render(page) {
     inLanguage: "en",
   });
 
-  const cs = crumbSchema(page.trail);
+  const cs = crumbSchema(page.trail, page.path);
   if (cs) graph.push(cs);
   (page.schema || []).forEach((n) => graph.push(n));
 
