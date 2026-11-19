@@ -4,41 +4,19 @@ export const SITE = "https://vivaanmarketing.com";
 export const BRAND = "Vivaan Marketing";
 export const EMAIL = "devmurari.sachin87@gmail.com";
 export const LINKEDIN = "https://www.linkedin.com/in/vivaan-martech-868863165/";
-
-// Prefilled mailto so the async intake needs no backend and no form service.
-export function mailto(subject, body) {
-  return (
-    "mailto:" +
-    EMAIL +
-    "?subject=" +
-    encodeURIComponent(subject) +
-    "&body=" +
-    encodeURIComponent(body)
-  );
-}
-
-export const AUDIT_MAILTO = mailto(
-  "Free AI Visibility Audit request",
-  [
-    "Hi,",
-    "",
-    "I would like the free AI Visibility Audit. Here are my three lines:",
-    "",
-    "1. Website: ",
-    "2. Category (how buyers describe what we sell): ",
-    "3. Top three competitors: ",
-    "",
-    "Thanks,",
-  ].join("\n")
-);
+export const CALENDLY = "https://calendly.com/devmurari-sachin87/new-meeting";
+// The founder's own site. Writing and LinkedIn ghostwriting are sold there, not here.
+export const FOUNDER_SITE = "https://sachindevmurari.com";
+export const AUDIT_URL = "/free-ai-visibility-audit/#request";
+// FormSubmit relays posts to EMAIL with no account. The first submission sends a
+// one-time activation email to that inbox; nothing is delivered until it is clicked.
+export const FORM_ACTION = "https://formsubmit.co/" + EMAIL;
 
 export const NAV_SERVICES = [
   ["/services/answer-engine-optimization/", "Answer Engine Optimization", "Get quoted in ChatGPT and Perplexity answers"],
   ["/services/generative-engine-optimization/", "Generative Engine Optimization", "Win citations in Google AI Overviews and Gemini"],
   ["/services/b2b-saas-seo/", "B2B SaaS SEO", "Topical authority that compounds into pipeline"],
-  ["/services/content-writing/", "Content Writing", "Long-form written by senior B2B specialists"],
   ["/services/content-marketing/", "Content Marketing", "Editorial calendars tied to revenue KPIs"],
-  ["/services/linkedin-personal-branding/", "LinkedIn Personal Branding", "Founder presence, ghostwritten and consistent"],
 ];
 
 const ICONS = {
@@ -112,7 +90,7 @@ function nav(active) {
     '<a href="/free-ai-visibility-audit/"' + cur("/free-ai-visibility-audit/") + ">Free audit</a>" +
     '<a href="/contact/"' + cur("/contact/") + ">Contact</a>" +
     "</nav>" +
-    '<a class="btn" href="' + AUDIT_MAILTO + '">Get Your Free Audit</a>' +
+    '<a class="btn" href="' + AUDIT_URL + '">Get Your Free Audit</a>' +
     "</div></header>"
   );
 }
@@ -133,7 +111,9 @@ function footer() {
     '<p class="foot-tag">Marketing starts with people.</p>' +
     '<p class="foot-blurb">B2B SaaS marketing built for the era when buyers ask an AI before they open a search tab.</p>' +
     "</div>" +
-    "<div><h4>Services</h4><ul>" + svc + "</ul></div>" +
+    "<div><h4>Services</h4><ul>" + svc +
+    '<li><a href="' + FOUNDER_SITE + '/services/content-writing.html" rel="noopener">Writing and LinkedIn ghostwriting</a></li>' +
+    "</ul></div>" +
     "<div><h4>Company</h4><ul>" +
     '<li><a href="/about/">About</a></li>' +
     '<li><a href="/results/">Results</a></li>' +
@@ -142,7 +122,8 @@ function footer() {
     "</ul></div>" +
     "<div><h4>Start here</h4><ul>" +
     '<li><a href="/free-ai-visibility-audit/">Free AI Visibility Audit</a></li>' +
-    '<li><a href="' + AUDIT_MAILTO + '">Request the audit</a></li>' +
+    '<li><a href="' + AUDIT_URL + '">Request the audit</a></li>' +
+    '<li><a href="' + CALENDLY + '" rel="noopener">Book a 30-minute call</a></li>' +
     '<li><a href="/services/">Compare services</a></li>' +
     "</ul></div>" +
     "</div>" +
@@ -150,6 +131,7 @@ function footer() {
     "<span>&copy; " + new Date().getFullYear() + " " + BRAND + ". Ahmedabad, India. Serving B2B teams worldwide.</span>" +
     '<span class="spacer"></span>' +
     "<span>Answers before rankings.</span>" +
+    '<span><a href="' + FOUNDER_SITE + '/" rel="noopener">Founder\'s site</a></span>' +
     "</div></div>" +
     "</div></footer>"
   );
@@ -344,7 +326,7 @@ export function pageHero({ kicker, h1, sub, ctaLabel, ctaHref, note, trail }) {
     (kicker ? '<p class="kicker">' + kicker + "</p>" : "") +
     "<h1>" + h1 + "</h1>" +
     '<p class="sub">' + sub + "</p>" +
-    '<div class="cta-row"><a class="btn big" href="' + (ctaHref || AUDIT_MAILTO) + '">' +
+    '<div class="cta-row"><a class="btn big" href="' + (ctaHref || AUDIT_URL) + '">' +
     (ctaLabel || "Get Your Free Audit") + "</a>" +
     '<a class="link-arrow" href="/services/">See all services</a></div>' +
     (note ? '<p class="cta-note">' + note + "</p>" : "") +
@@ -356,8 +338,9 @@ export function ctaPanel(title, text, fine) {
   return (
     '<div class="cta"><div class="container"><div class="cta-panel">' +
     "<h2>" + title + "</h2><p>" + text + "</p>" +
-    '<div class="cta-row"><a class="btn big on-grad" href="' + AUDIT_MAILTO + '">Get Your Free Audit</a></div>' +
-    '<p class="fine">' + (fine || "Three lines of intake. Delivered by email in five business days. No call required.") + "</p>" +
+    '<div class="cta-row"><a class="btn big on-grad" href="' + AUDIT_URL + '">Get Your Free Audit</a>' +
+    '<a class="link-arrow on-grad" href="' + CALENDLY + '" rel="noopener">Or book a 30-minute call</a></div>' +
+    '<p class="fine">' + (fine || "A two-minute form. Report by email in five business days. A call is optional, never required.") + "</p>" +
     "</div></div></div>"
   );
 }
@@ -368,5 +351,34 @@ export function secHead(overline, h2, p, wide) {
     '<p class="overline">' + overline + "</p><h2>" + h2 + "</h2>" +
     (p ? "<p>" + p + "</p>" : "") +
     "</div>"
+  );
+}
+
+// Lead form. Posts to FormSubmit, which emails EMAIL and redirects to /thanks/.
+// kind = "audit" asks for the three intake lines; anything else is a general enquiry.
+export function leadForm(kind) {
+  const audit = kind === "audit";
+  const f = (name, label, type, req, ph) =>
+    '<label class="field"><span>' + label + (req ? "" : ' <em>(optional)</em>') + "</span>" +
+    (type === "textarea"
+      ? '<textarea name="' + name + '" rows="4"' + (req ? " required" : "") + (ph ? ' placeholder="' + ph + '"' : "") + "></textarea>"
+      : '<input type="' + type + '" name="' + name + '"' + (req ? " required" : "") + (ph ? ' placeholder="' + ph + '"' : "") +
+        (type === "email" ? ' autocomplete="email"' : name === "name" ? ' autocomplete="name"' : type === "url" ? ' autocomplete="url"' : "") + ">") +
+    "</label>";
+  return (
+    '<form class="lead-form" action="' + FORM_ACTION + '" method="POST">' +
+    '<input type="hidden" name="_subject" value="' + (audit ? "New free audit request" : "New enquiry") + ' (vivaanmarketing.com)">' +
+    '<input type="hidden" name="_next" value="' + SITE + '/thanks/">' +
+    '<input type="hidden" name="_template" value="table">' +
+    '<input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+    '<div class="field-row">' + f("name", "Your name", "text", true) + f("email", "Work email", "email", true) + "</div>" +
+    f("website", "Company website", "text", true, "yourcompany.com") +
+    (audit
+      ? f("category", "Your category, as buyers describe it", "text", true, "e.g. employee onboarding software") +
+        f("competitors", "Top three competitors", "text", false, "competitor-a.com, competitor-b.com")
+      : f("message", "What are you trying to solve?", "textarea", true)) +
+    '<button class="btn big" type="submit">' + (audit ? "Request my free audit" : "Send enquiry") + "</button>" +
+    '<p class="field-note">Replies within one business day. Prefer to talk? <a href="' + CALENDLY + '" rel="noopener">Book a 30-minute call</a>.</p>' +
+    "</form>"
   );
 }

@@ -1,5 +1,5 @@
 import {
-  SITE, BRAND, AUDIT_MAILTO, LINKEDIN, mailto,
+  SITE, BRAND, AUDIT_URL, CALENDLY, FOUNDER_SITE, LINKEDIN, leadForm,
   render, pageHero, ctaPanel, secHead, faqBlock, faqSchema, icon, breadcrumbs,
 } from "./layout.mjs";
 
@@ -91,6 +91,10 @@ function answer(text) {
   return '<p class="answer-first">' + text + "</p>";
 }
 
+// Writing and LinkedIn ghostwriting are delivered by the founder directly.
+const WRITING_CARD = { href: FOUNDER_SITE + "/services/content-writing.html", icon: "write", title: "Writing and LinkedIn ghostwriting", text: "Long-form B2B writing and founder ghostwriting are handled by our founder directly.", go: "Visit the founder's site" };
+const AUDIT_CARD = { href: "/free-ai-visibility-audit/", icon: "audit", title: "Free AI Visibility Audit", text: "See which buyer questions cite a competitor instead of you, across four AI engines, in five business days.", go: "Get the free audit" };
+
 // ---------- HOME ----------
 
 const homeFaqs = [
@@ -104,11 +108,11 @@ const homeFaqs = [
   },
   {
     q: "Which AI engines do you optimise for?",
-    a: "ChatGPT and its search mode, Google AI Overviews and AI Mode, Perplexity, Google Gemini, Claude, and Microsoft Copilot. These systems draw on overlapping but distinct source pools, so we track each separately rather than assuming one score covers all of them.",
+    a: "Monthly programmes track six: ChatGPT and its search mode, Google AI Overviews and AI Mode, Perplexity, Google Gemini, Claude, and Microsoft Copilot. The free audit covers the four that carry most B2B buyer research (ChatGPT, Perplexity, Google AI Overviews and Gemini). These systems draw on overlapping but distinct source pools, so we track each separately rather than assuming one score covers all of them.",
   },
   {
     q: "What does an engagement cost?",
-    a: "The AI Visibility Audit is free. Monthly programmes typically run between 2,000 and 6,000 US dollars depending on how many of the six services are in scope and the publishing volume. There is no long lock-in, and pricing is agreed in writing before anything starts.",
+    a: "The AI Visibility Audit is free. Monthly programmes typically run between 2,000 and 6,000 US dollars depending on how many of the four services are in scope and the publishing volume. There is no long lock-in, and pricing is agreed in writing before anything starts.",
   },
   {
     q: "How long before we see results?",
@@ -132,10 +136,10 @@ const home = {
     "<div>" +
     '<p class="kicker">B2B SaaS marketing for the AI answer era</p>' +
     "<h1>Your buyers ask AI first. <span class=\"grad-text\">Make sure it names you.</span></h1>" +
-    '<p class="sub">Vivaan Marketing is a <strong>B2B SaaS marketing agency</strong> that wins the citation, not just the ranking. We engineer the content, structure and authority that make ChatGPT, Google AI Overviews, Perplexity and Gemini quote your brand, then compound it with SEO, editorial and LinkedIn.</p>' +
-    '<div class="cta-row"><a class="btn big" href="' + AUDIT_MAILTO + '">Get Your Free Audit</a>' +
-    '<a class="link-arrow" href="/services/">Explore the six services</a></div>' +
-    '<p class="cta-note">Three lines of intake. A full citation report in five business days. No call required.</p>' +
+    '<p class="sub">Vivaan Marketing is a <strong>B2B SaaS marketing agency</strong> that wins the citation, not just the ranking. We engineer the content, structure and authority that make ChatGPT, Google AI Overviews, Perplexity and Gemini quote your brand, then compound it with SEO and content marketing.</p>' +
+    '<div class="cta-row"><a class="btn big" href="' + AUDIT_URL + '">Get Your Free Audit</a>' +
+    '<a class="link-arrow" href="' + CALENDLY + '" rel="noopener">Book a 30-minute call</a></div>' +
+    '<p class="cta-note">A two-minute form. A full citation report in five business days. A call is optional.</p>' +
     "</div>" +
     // answer card visual
     '<div class="answer-stack"><div class="answer-glow"></div>' +
@@ -182,18 +186,17 @@ const home = {
     '<section id="services"><div class="container">' +
     secHead(
       "Services",
-      "Six services, one compounding system",
+      "Four services, one compounding system",
       "Answer engines reward the same things buyers do: clarity, evidence and consistency. Each service feeds the next, so authority built in one channel shows up in the others."
     ) +
     cardsGrid([
       { href: "/services/answer-engine-optimization/", icon: "aeo", title: "Answer Engine Optimization", text: "Structure content so ChatGPT and Perplexity can lift a clean, attributable answer straight from your page.", go: "AEO services" },
       { href: "/services/generative-engine-optimization/", icon: "geo", title: "Generative Engine Optimization", text: "Build the entity, schema and third-party corroboration that get you cited in Google AI Overviews and Gemini.", go: "GEO services" },
       { href: "/services/b2b-saas-seo/", icon: "seo", title: "B2B SaaS SEO", text: "Topical maps and keyword clusters that own a category instead of chasing scattered volume.", go: "SaaS SEO" },
-      { href: "/services/content-writing/", icon: "write", title: "Content Writing", text: "Long-form blogs, whitepapers and comparison pages written by specialists who understand the product.", go: "Content writing" },
-      { href: "/services/content-marketing/", icon: "market", title: "Content Marketing", text: "Editorial calendars, distribution and reporting mapped to pipeline, not to traffic vanity metrics.", go: "Content marketing" },
-      { href: "/services/linkedin-personal-branding/", icon: "linkedin", title: "LinkedIn Personal Branding", text: "Ghostwritten founder and executive presence that turns expertise into inbound demand.", go: "LinkedIn branding" },
-    ]) +
-    "</div></section>" +
+      { href: "/services/content-marketing/", icon: "market", title: "Content Marketing", text: "Editorial calendars, specialist-written content and reporting mapped to pipeline, not to traffic vanity metrics.", go: "Content marketing" },
+      AUDIT_CARD,
+      WRITING_CARD,
+    ]) +    "</div></section>" +
 
     // process
     '<section><div class="container">' +
@@ -203,7 +206,7 @@ const home = {
       "No standing calls, no status meetings. You get artefacts you can forward to a board deck."
     ) +
     steps([
-      ["You send three lines", "Website, category, top competitors. That is the entire intake."],
+      ["You fill a short form", "Website, category, top competitors. That is the entire intake."],
       ["We audit and baseline", "Citation status across four AI engines, mapped against your competitors, in your inbox in five business days."],
       ["We agree the scope", "The audit stands alone. If the gap is worth closing, we scope only the services that close it."],
       ["We ship and report", "Monthly execution with a citation and pipeline report tracking movement against the baseline."],
@@ -259,7 +262,7 @@ const home = {
 
 const servicesFaqs = [
   {
-    q: "Do I have to buy all six services?",
+    q: "Do I have to buy all four services?",
     a: "No. Most engagements start with two or three. The audit tells us which ones actually move your numbers, and we scope only those. Buying everything at once is usually the wrong call for a team under 50 people.",
   },
   {
@@ -281,7 +284,7 @@ const servicesHub = {
   trail: [HOME, { name: "Services", url: "/services/" }],
   title: "B2B SaaS Marketing Services | AEO, GEO, SEO and Content",
   description:
-    "Six B2B SaaS marketing services under one strategy: AEO, GEO, SaaS SEO, content writing, content marketing and LinkedIn personal branding.",
+    "Four B2B SaaS marketing services under one strategy: answer engine optimization, generative engine optimization, B2B SaaS SEO and content marketing.",
   schema: [
     faqSchema(servicesFaqs),
     {
@@ -292,9 +295,7 @@ const servicesHub = {
         ["Answer Engine Optimization", "/services/answer-engine-optimization/"],
         ["Generative Engine Optimization", "/services/generative-engine-optimization/"],
         ["B2B SaaS SEO", "/services/b2b-saas-seo/"],
-        ["Content Writing", "/services/content-writing/"],
         ["Content Marketing", "/services/content-marketing/"],
-        ["LinkedIn Personal Branding", "/services/linkedin-personal-branding/"],
       ].map(([name, path], i) => ({
         "@type": "ListItem", position: i + 1, name: name, url: SITE + path,
       })),
@@ -304,22 +305,22 @@ const servicesHub = {
     pageHero({
       kicker: "Services",
       h1: "B2B SaaS marketing services built for AI search",
-      sub: "Six disciplines that share one goal: make your brand the source an answer engine trusts, and the result a buyer clicks. Start with the audit, scope only what moves the number.",
+      sub: "Four disciplines that share one goal: make your brand the source an answer engine trusts, and the result a buyer clicks. Start with the audit, scope only what moves the number.",
       trail: [HOME, { name: "Services" }],
     }) +
 
     '<section class="tight"><div class="container">' +
     secHead("Overview", "What each service does", "", true) +
     answer(
-      "<strong>Vivaan Marketing offers six B2B SaaS marketing services:</strong> answer engine optimization (page-level extractability), generative engine optimization (brand entity and off-site corroboration), B2B SaaS SEO (topical authority and clustering), content writing (long-form by specialists), content marketing (calendar, distribution and pipeline reporting), and LinkedIn personal branding (ghostwritten executive presence). Engagements typically combine two or three."
+      "<strong>Vivaan Marketing offers four B2B SaaS marketing services:</strong> answer engine optimization (page-level extractability), generative engine optimization (brand entity and off-site corroboration), B2B SaaS SEO (topical authority and clustering), and content marketing (specialist-written content, calendar, distribution and pipeline reporting). Engagements typically combine two or three."
     ) +
     cardsGrid([
       { href: "/services/answer-engine-optimization/", icon: "aeo", title: "Answer Engine Optimization", text: "Answer blocks, schema, clean heading logic and comparison tables so ChatGPT and Perplexity can quote you accurately.", go: "AEO services" },
       { href: "/services/generative-engine-optimization/", icon: "geo", title: "Generative Engine Optimization", text: "Entity definition, knowledge graph alignment and third-party corroboration for AI Overviews and Gemini.", go: "GEO services" },
       { href: "/services/b2b-saas-seo/", icon: "seo", title: "B2B SaaS SEO", text: "Topical authority maps, cluster architecture, technical fixes and internal linking that compounds.", go: "SaaS SEO" },
-      { href: "/services/content-writing/", icon: "write", title: "Content Writing", text: "Blogs, whitepapers, comparison and alternatives pages written by people who can read a product doc.", go: "Content writing" },
-      { href: "/services/content-marketing/", icon: "market", title: "Content Marketing", text: "Quarterly editorial strategy, distribution playbooks and reporting tied to pipeline KPIs.", go: "Content marketing" },
-      { href: "/services/linkedin-personal-branding/", icon: "linkedin", title: "LinkedIn Personal Branding", text: "Founder and executive ghostwriting with a posting cadence that survives a busy quarter.", go: "LinkedIn branding" },
+      { href: "/services/content-marketing/", icon: "market", title: "Content Marketing", text: "Quarterly editorial strategy, specialist-written content, distribution playbooks and reporting tied to pipeline KPIs.", go: "Content marketing" },
+      AUDIT_CARD,
+      WRITING_CARD,
     ]) +
     "</div></section>" +
 
@@ -332,9 +333,7 @@ const servicesHub = {
         ["<strong>Answer Engine Optimization</strong>", "You rank well but AI answers quote someone else.", "New citations on buyer-intent questions within 4 to 8 weeks."],
         ["<strong>Generative Engine Optimization</strong>", "Engines describe your brand vaguely, wrongly, or not at all.", "Consistent, correct brand description across engines."],
         ["<strong>B2B SaaS SEO</strong>", "Traffic is flat and scattered across unrelated keywords.", "A clustered topical map and rising non-brand organic sessions."],
-        ["<strong>Content Writing</strong>", "The calendar exists but nothing ships, or what ships is thin.", "A reliable publishing cadence at a quality your team will approve."],
         ["<strong>Content Marketing</strong>", "Content gets published but nobody can tie it to pipeline.", "An editorial plan and reporting your CRO will accept."],
-        ["<strong>LinkedIn Personal Branding</strong>", "Your founder has the expertise but no consistent presence.", "A steady posting rhythm and inbound conversations from it."],
       ]
     ) +
     "</div></section>" +
@@ -495,7 +494,7 @@ const aeo = servicePage({
   related: [
     { href: "/services/generative-engine-optimization/", icon: "geo", title: "Generative Engine Optimization", text: "The off-site half of the same problem: entity authority and corroboration.", go: "GEO services" },
     { href: "/services/b2b-saas-seo/", icon: "seo", title: "B2B SaaS SEO", text: "The topical authority foundation that AEO amplifies.", go: "SaaS SEO" },
-    { href: "/services/content-writing/", icon: "write", title: "Content Writing", text: "Answer coverage for questions where your category has no good source yet.", go: "Content writing" },
+    { href: "/services/content-marketing/", icon: "market", title: "Content Marketing", text: "Answer coverage for questions where your category has no good source yet.", go: "Content marketing" },
   ],
   ctaH2: "See which answers name your competitors",
   ctaText: "The free AI Visibility Audit runs your category's buyer questions across four engines and shows you the exact citation gap.",
@@ -569,7 +568,7 @@ const geo = servicePage({
   related: [
     { href: "/services/answer-engine-optimization/", icon: "aeo", title: "Answer Engine Optimization", text: "The on-site half: making your pages extractable once the brand is trusted.", go: "AEO services" },
     { href: "/services/content-marketing/", icon: "market", title: "Content Marketing", text: "Distribution that builds the corroboration GEO depends on.", go: "Content marketing" },
-    { href: "/services/linkedin-personal-branding/", icon: "linkedin", title: "LinkedIn Personal Branding", text: "Named expert presence, one of the strongest corroboration signals available.", go: "LinkedIn branding" },
+    { href: FOUNDER_SITE + "/services/linkedin-branding.html", icon: "linkedin", title: "LinkedIn ghostwriting", text: "Named expert presence, one of the strongest corroboration signals available. Handled by our founder directly.", go: "Visit the founder's site" },
   ],
   ctaH2: "Find out how AI describes your brand",
   ctaText: "The free audit includes an entity check: exactly how each engine describes you today, and what it gets wrong.",
@@ -643,85 +642,11 @@ const saasSeo = servicePage({
   ],
   related: [
     { href: "/services/answer-engine-optimization/", icon: "aeo", title: "Answer Engine Optimization", text: "Turn the rankings you earn into citations inside AI answers.", go: "AEO services" },
-    { href: "/services/content-writing/", icon: "write", title: "Content Writing", text: "Execution for the topical map, written by B2B specialists.", go: "Content writing" },
+    { href: "/services/content-marketing/", icon: "market", title: "Content Marketing", text: "Execution for the topical map, written by B2B specialists.", go: "Content marketing" },
     { href: "/services/content-marketing/", icon: "market", title: "Content Marketing", text: "The calendar, distribution and pipeline reporting layer.", go: "Content marketing" },
   ],
   ctaH2: "Get the gap analysis first",
   ctaText: "The free audit covers AI citation status and flags the organic and technical gaps worth fixing before you commit to a retainer.",
-});
-
-// ---------- CONTENT WRITING ----------
-
-const contentWriting = servicePage({
-  path: "/services/content-writing/",
-  crumb: "Content Writing",
-  title: "B2B Content Writing Services for SaaS and Enterprise Tech",
-  description:
-    "B2B content writing services: long-form blogs, whitepapers, comparison pages and case studies by SaaS and enterprise tech specialists. 500+ shipped.",
-  serviceName: "B2B Content Writing",
-  serviceType: "Content Writing",
-  serviceDesc:
-    "Long-form B2B content production including blog articles, whitepapers, comparison pages, case studies and technical explainers for SaaS and enterprise technology brands.",
-  kicker: "Content Writing",
-  h1: "B2B content writing services",
-  sub: "Writing that survives a technical reader. Long-form articles, whitepapers, comparison pages and case studies produced by specialists who can read a product doc and interview an engineer without a translator.",
-  defH2: "What are B2B content writing services?",
-  definition:
-    "<strong>B2B content writing services produce the long-form assets a business buyer needs to evaluate a vendor:</strong> in-depth blog articles, whitepapers, comparison and alternatives pages, case studies, technical explainers and solution briefs. Unlike consumer copywriting, the work is judged on subject accuracy and evaluator credibility, which is why domain-specific writers consistently outperform generalists in technical categories.",
-  intro:
-    "<p>Most thin B2B content is not a writing problem. It is a research problem. A generalist writer given a two-line brief will produce something structurally competent and substantively empty, and a technical evaluator will detect that in about eight seconds.</p>" +
-    "<h3>Who this is for</h3>" +
-    "<p>Marketing teams with a strategy and a calendar but no reliable production capacity, and teams whose current output is passing review but not moving anything.</p>",
-  inclH2: "What we write",
-  inclSub: "Formats chosen by what the buyer stage actually needs.",
-  included: [
-    "<strong>Long-form blog articles.</strong> 1,500 to 3,000 words, built on a topical map, structured for extraction by AI engines.",
-    "<strong>Comparison and alternatives pages.</strong> The highest-converting page type in B2B SaaS, and the one most often cited by answer engines.",
-    "<strong>Whitepapers and ebooks.</strong> Gated or ungated depth assets for the evaluation stage.",
-    "<strong>Case studies.</strong> Structured around a measurable outcome rather than a client compliment.",
-    "<strong>Technical explainers.</strong> Architecture, integration and implementation content written for practitioners.",
-    "<strong>Landing and solution pages.</strong> Conversion copy that survives a procurement review.",
-    "<strong>Content refreshes.</strong> Rebuilding existing pages for accuracy, depth and AI extractability.",
-  ],
-  tableBlock: {
-    h2: "Which format fits which buyer stage",
-    sub: "Publishing the right format at the wrong stage is the most common reason good content underperforms.",
-    caption: "B2B content format selection by funnel stage.",
-    head: ["Stage", "Buyer question", "Format that works"],
-    rows: [
-      ["<strong>Problem aware</strong>", "Why is this happening to us?", "Long-form explainer, original research, benchmark piece"],
-      ["<strong>Solution aware</strong>", "What kinds of tools solve this?", "Category guide, buyer's guide, framework article"],
-      ["<strong>Vendor aware</strong>", "Which vendor is right for us?", "Comparison page, alternatives page, integration guide"],
-      ["<strong>Evaluation</strong>", "Will this work in our environment?", "Case study, technical whitepaper, implementation guide"],
-      ["<strong>Post purchase</strong>", "How do we get value faster?", "Documentation-adjacent guides, playbooks, enablement content"],
-    ],
-  },
-  processH2: "How production runs",
-  process: [
-    ["Brief and research", "A detailed brief covering intent, entities, competitors, sources and the answer blocks the piece must contain."],
-    ["Subject matter input", "A short async interview or a recorded walkthrough. Fifteen minutes of your expert prevents a generic draft."],
-    ["Draft and edit", "Written by a B2B specialist, then edited against a structural and factual checklist before it reaches you."],
-    ["Optimise and ship", "Schema, internal links, answer blocks and metadata applied before publication, not bolted on afterwards."],
-  ],
-  proofH2: "What this has produced",
-  proof: [
-    ["500+", "Long-form articles published", "Across SaaS, engineering, healthcare, logistics and enterprise software categories.", "Volume shipped"],
-    ["3x", "Blog traffic in six months", "Where writing was paired with a topical map rather than an ad hoc calendar.", "Client outcome"],
-  ],
-  faqs: [
-    { q: "Do you use AI to write the content?", a: "We use AI for research acceleration, outlining support and quality checks. We do not ship generated drafts as deliverables. In technical B2B categories a generated draft reads plausibly and is substantively wrong often enough that an evaluator loses trust, which costs more than it saves." },
-    { q: "How do you handle technical accuracy in specialised categories?", a: "Two mechanisms: writers assigned by domain rather than availability, and a short async input from your subject matter expert on anything involving architecture, compliance or implementation. Every factual claim is sourced and linked." },
-    { q: "What is the turnaround time?", a: "A standard long-form article runs seven to ten business days from approved brief to final draft, including one revision round. Whitepapers run two to three weeks. Rush work is possible but we would rather adjust the calendar than the research depth." },
-    { q: "Can you match our existing brand voice?", a: "Yes. We build a voice guide from your best-performing existing pages and any style rules you already have, then work against it. The first two pieces usually need heavier revision while the guide calibrates." },
-    { q: "How many revisions are included?", a: "Two rounds per piece as standard. In practice most pieces need one, because the brief and the subject matter input resolve the disagreements before drafting rather than after." },
-  ],
-  related: [
-    { href: "/services/b2b-saas-seo/", icon: "seo", title: "B2B SaaS SEO", text: "The topical map that tells writing what to produce and in what order.", go: "SaaS SEO" },
-    { href: "/services/answer-engine-optimization/", icon: "aeo", title: "Answer Engine Optimization", text: "Structure every piece so AI engines can quote it.", go: "AEO services" },
-    { href: "/services/content-marketing/", icon: "market", title: "Content Marketing", text: "Calendar, distribution and reporting around the output.", go: "Content marketing" },
-  ],
-  ctaH2: "Want to see the gap before you commission anything?",
-  ctaText: "The free audit shows which buyer questions in your category have no credible source yet. That list is the best content brief you will get.",
 });
 
 // ---------- CONTENT MARKETING ----------
@@ -791,87 +716,12 @@ const contentMarketing = servicePage({
     { q: "How quickly can a programme start?", a: "Discovery and strategy take two to three weeks, and the first assets usually ship in week four. Distribution and reporting are live from the first published piece rather than added later." },
   ],
   related: [
-    { href: "/services/content-writing/", icon: "write", title: "Content Writing", text: "The production capacity that fills the calendar.", go: "Content writing" },
-    { href: "/services/linkedin-personal-branding/", icon: "linkedin", title: "LinkedIn Personal Branding", text: "The distribution channel with the shortest path to B2B buyers.", go: "LinkedIn branding" },
+    { href: "/services/b2b-saas-seo/", icon: "seo", title: "B2B SaaS SEO", text: "The topical map that tells the calendar what to publish.", go: "SaaS SEO" },
+    { href: FOUNDER_SITE + "/services/linkedin-branding.html", icon: "linkedin", title: "LinkedIn ghostwriting", text: "The distribution channel with the shortest path to B2B buyers. Handled by our founder directly.", go: "Visit the founder's site" },
     { href: "/services/generative-engine-optimization/", icon: "geo", title: "Generative Engine Optimization", text: "Turn distribution into the corroboration AI engines reward.", go: "GEO services" },
   ],
   ctaH2: "Start with the diagnosis",
   ctaText: "The free AI Visibility Audit is the fastest way to see whether your current content programme is producing authority a machine can recognise.",
-});
-
-// ---------- LINKEDIN ----------
-
-const linkedin = servicePage({
-  path: "/services/linkedin-personal-branding/",
-  crumb: "LinkedIn Personal Branding",
-  title: "LinkedIn Personal Branding Services for B2B Founders",
-  description:
-    "LinkedIn personal branding and ghostwriting for B2B founders and executives. Positioning, content pillars, weekly posts and engagement. 200K+ organic views ghostwritten.",
-  serviceName: "LinkedIn Personal Branding",
-  serviceType: "Personal Branding",
-  serviceDesc:
-    "LinkedIn positioning, profile optimisation, ghostwriting and posting cadence management for B2B founders and executives in technology companies.",
-  kicker: "LinkedIn Personal Branding",
-  h1: "LinkedIn personal branding services",
-  sub: "Your founder has the expertise. What is missing is a system that gets it published every week without eating a workday. We build the positioning, write the posts and hold the cadence.",
-  defH2: "What are LinkedIn personal branding services?",
-  definition:
-    "<strong>LinkedIn personal branding services build and sustain an executive's public presence:</strong> positioning and narrative, profile optimisation, content pillars, ghostwritten posts on a fixed cadence, and engagement strategy. For B2B companies the commercial logic is straightforward, because buyers follow and trust individuals more readily than company pages, and founder-led content consistently outperforms brand accounts on reach and inbound conversation quality.",
-  intro:
-    "<p>Nearly every founder-led programme dies the same way. Three weeks of enthusiastic posting, a busy quarter, then silence, then an apologetic restart in month five. The expertise was never the constraint. The production system was.</p>" +
-    "<h3>Who this is for</h3>" +
-    "<p>Founders, CEOs and senior executives at B2B technology companies who have genuine domain expertise, a real point of view, and no realistic path to writing five posts a week themselves.</p>",
-  inclH2: "What the engagement covers",
-  inclSub: "Positioning, production and the cadence that makes it compound.",
-  included: [
-    "<strong>Positioning and narrative.</strong> The specific thing you are known for, narrow enough to be memorable and true enough to defend.",
-    "<strong>Profile optimisation.</strong> Headline, about section, featured items and experience rewritten as a conversion asset.",
-    "<strong>Content pillars.</strong> Three to five recurring themes that carry a year of posting without repeating yourself.",
-    "<strong>Ghostwritten posts.</strong> Three to five per week in your voice, drawn from short async input rather than long interviews.",
-    "<strong>Idea capture system.</strong> A lightweight way to turn a voice note or a Slack rant into next week's post.",
-    "<strong>Engagement strategy.</strong> Which conversations to enter and which accounts to be visible to, because reach follows relevance.",
-    "<strong>Monthly reporting.</strong> Impressions, profile visits, follower quality and inbound conversations attributed to posts.",
-  ],
-  tableBlock: {
-    h2: "Founder profile versus company page",
-    sub: "Both have a role, but the reach difference is not marginal.",
-    caption: "Comparison of founder-led and company-page LinkedIn content.",
-    head: ["Dimension", "Company page", "Founder profile"],
-    rows: [
-      ["<strong>Organic reach</strong>", "Structurally suppressed by the feed", "Consistently and substantially higher"],
-      ["<strong>Trust</strong>", "Read as marketing", "Read as a person with a view"],
-      ["<strong>Comment quality</strong>", "Sparse, often from employees", "Peers, prospects and industry voices"],
-      ["<strong>Inbound quality</strong>", "Generic enquiries", "Specific, warm and further along"],
-      ["<strong>Best used for</strong>", "Announcements, hiring, credibility", "Point of view, demand creation, relationships"],
-      ["<strong>AI visibility value</strong>", "Limited", "Named expert corroboration that models weight"],
-    ],
-  },
-  processH2: "How the engagement runs",
-  process: [
-    ["Positioning session", "One session to extract the narrative, the strong opinions and the stories only you can tell."],
-    ["Profile and pillars", "Profile rebuilt, content pillars agreed, and a four-week runway drafted before anything goes live."],
-    ["Weekly production", "Posts drafted, sent for approval in a batch, and scheduled. Your input stays under thirty minutes a week."],
-    ["Report and refine", "Monthly reporting on reach, profile visits and inbound, with pillar weighting adjusted to what lands."],
-  ],
-  proofH2: "What this has produced",
-  proof: [
-    ["200K+", "Organic views ghostwritten", "Executive thought leadership published weekly, compounding into inbound conversations.", "LinkedIn programme"],
-    ["4K+", "Audience built organically", "Followers earned through consistent publishing, with no paid amplification.", "Owned audience"],
-  ],
-  faqs: [
-    { q: "Will the posts actually sound like me?", a: "That is the whole job. We build a voice profile from your existing writing, recorded calls and how you argue in Slack, then calibrate over the first three to four weeks. You approve every post before it publishes, and early on you will edit more while the voice tunes in." },
-    { q: "How much of my time does this take?", a: "Under thirty minutes a week once running. That is typically one voice note of raw thinking and a batch approval pass. The positioning session at the start is longer, around ninety minutes." },
-    { q: "How long before this produces inbound?", a: "Reach usually moves within four to six weeks. Inbound conversations typically start in month two or three, because B2B audiences need repeated exposure before they act. Programmes that stop at week six almost always stop just before the compounding starts." },
-    { q: "Is ghostwriting dishonest?", a: "The ideas, opinions and expertise must be yours. We handle structure, phrasing and the discipline of shipping. That is the same arrangement behind most executive bylines, keynote scripts and shareholder letters, and it stays legitimate as long as the substance is genuinely the executive's." },
-    { q: "Does LinkedIn activity help AI visibility?", a: "Indirectly but meaningfully. A consistent, named expert presence strengthens the entity signals that generative engines use when deciding whether to name a person or company as an authority, and posts frequently get surfaced and referenced in AI answers on niche professional topics." },
-  ],
-  related: [
-    { href: "/services/generative-engine-optimization/", icon: "geo", title: "Generative Engine Optimization", text: "Named expert presence is a corroboration signal engines weight.", go: "GEO services" },
-    { href: "/services/content-marketing/", icon: "market", title: "Content Marketing", text: "Repurpose long-form assets into the weekly posting cadence.", go: "Content marketing" },
-    { href: "/services/content-writing/", icon: "write", title: "Content Writing", text: "Turn recurring post themes into ranking long-form pages.", go: "Content writing" },
-  ],
-  ctaH2: "Build authority machines can see too",
-  ctaText: "The free audit shows how AI engines currently describe your company and its leadership, which is usually the fastest argument for starting.",
 });
 
 // ---------- FREE AUDIT ----------
@@ -910,7 +760,7 @@ const auditPage = {
       name: "How to request the free AI Visibility Audit",
       totalTime: "PT5M",
       step: [
-        { "@type": "HowToStep", position: 1, name: "Send three lines", text: "Email your website, your category as buyers describe it, and your top three competitors." },
+        { "@type": "HowToStep", position: 1, name: "Fill in the short form", text: "Send your website, your category as buyers describe it, and your top three competitors through the form on this page." },
         { "@type": "HowToStep", position: 2, name: "We run the queries", text: "We query your category's buyer questions across ChatGPT, Perplexity, Google AI Overviews and Gemini and record every citation." },
         { "@type": "HowToStep", position: 3, name: "Receive the report", text: "A citation map, competitor analysis and prioritised gap list arrives by email within five business days." },
       ],
@@ -920,9 +770,10 @@ const auditPage = {
     pageHero({
       kicker: "Free, no call required",
       h1: "Free AI Visibility Audit",
-      sub: "Find out exactly which buyer questions in your category name a competitor instead of you, across <strong>ChatGPT, Perplexity, Google AI Overviews and Gemini</strong>. Three lines of intake, five business days, no meeting.",
+      sub: "Find out exactly which buyer questions in your category name a competitor instead of you, across <strong>ChatGPT, Perplexity, Google AI Overviews and Gemini</strong>. A two-minute form, five business days, no meeting required.",
       ctaLabel: "Get Your Free Audit",
-      note: "We reply from a real inbox. No autoresponder sequence, no calendar link.",
+      ctaHref: "#request",
+      note: "We reply from a real inbox. No autoresponder sequence.",
       trail: [HOME, { name: "Free AI Visibility Audit" }],
     }) +
     statBar() +
@@ -946,7 +797,7 @@ const auditPage = {
         "<span><strong>" + i[0] + "</strong> " + i[1] + "</span></li>"
     ).join("") +
     "</ul>" +
-    '<a class="btn big" href="' + AUDIT_MAILTO + '">Get Your Free Audit</a></div>' +
+    '<a class="btn big" href="#request">Get Your Free Audit</a></div>' +
     '<div class="audit-visual">' +
     '<div class="gap-row"><span class="kq">"best [category] software 2026"</span><span class="pill gap">Not cited</span></div>' +
     '<div class="gap-row"><span class="kq">"[competitor] alternatives"</span><span class="pill gap">Not cited</span></div>' +
@@ -961,7 +812,7 @@ const auditPage = {
     '<section><div class="container">' +
     secHead("Process", "Three lines in, a report out", "Deliberately the lowest-friction intake we could design.") +
     steps([
-      ["Send three lines", "Website, category as buyers describe it, top three competitors. Nothing else is required."],
+      ["Fill in the form", "Website, category as buyers describe it, top three competitors. Nothing else is required."],
       ["We run the queries", "Your category's buyer questions, run repeatedly across four engines to account for response variance."],
       ["We diagnose the gaps", "Every missing citation traced back to a structural cause rather than left as an observation."],
       ["You get the report", "By email within five business days, yours to act on with or without us."],
@@ -980,15 +831,16 @@ const auditPage = {
     "</div></section>" +
 
     '<section><div class="container">' +
-    secHead("FAQ", "Questions before you send the email", "") +
+    secHead("FAQ", "Questions before you request it", "") +
     faqBlock(auditFaqs) +
     "</div></section>" +
 
-    ctaPanel(
-      "Send the three lines",
-      "Your website, your category, your top three competitors. The citation report comes back within five business days.",
-      "No forms. No calendar links. No call required at any point."
-    ),
+    '<section id="request" class="end-pad"><div class="container">' +
+    secHead("Request", "Send the three lines", "Your website, your category, your top three competitors. The citation report comes back within five business days.") +
+    '<div class="form-card"><h3>Request your free AI Visibility Audit</h3>' +
+    "<p>No call required at any point. If you would rather talk it through, book a call instead.</p>" +
+    leadForm("audit") +
+    "</div></div></section>",
 };
 
 // ---------- RESULTS ----------
@@ -1138,7 +990,7 @@ const about = {
 
 const contactFaqs = [
   { q: "How fast do you reply?", a: "Within one business day, from a real inbox. There is no autoresponder sequence and no chatbot in front of it." },
-  { q: "Do I need to book a call to work with you?", a: "No. Scoping, proposals and delivery all run over email by default. If you prefer a call we will do one, but nothing in the process requires it." },
+  { q: "Do I need to book a call to work with you?", a: "No. Scoping, proposals and delivery all run over email by default. If you prefer a call, book a 30-minute slot from this page, but nothing in the process requires it." },
   { q: "What information should I include?", a: "For the audit, three lines: website, category as your buyers describe it, and top three competitors. For anything else, a sentence on what is not working is enough to start." },
   { q: "Do you take on projects outside B2B technology?", a: "Rarely. The value here is category depth in B2B SaaS and enterprise technology, and that advantage disappears outside it. If you are outside that space we will usually say so rather than take the work." },
 ];
@@ -1148,7 +1000,7 @@ const contact = {
   trail: [HOME, { name: "Contact", url: "/contact/" }],
   title: "Contact Vivaan Marketing | B2B SaaS Marketing Agency",
   description:
-    "Contact Vivaan Marketing for B2B SaaS marketing, AI visibility, SEO, content and LinkedIn. Reply within one business day. No forms and no call required.",
+    "Contact Vivaan Marketing for B2B SaaS marketing, AI visibility, SEO and content. Reply within one business day, or book a 30-minute call.",
   schema: [
     faqSchema(contactFaqs),
     {
@@ -1162,7 +1014,9 @@ const contact = {
     pageHero({
       kicker: "Contact",
       h1: "Tell us what is not working",
-      sub: "One email, one business day, one real reply. No forms to fill in, no discovery call to sit through before anyone tells you anything useful.",
+      sub: "One short form, one business day, one real reply. Or book a 30-minute call if you would rather talk.",
+      ctaLabel: "Book a 30-minute call",
+      ctaHref: CALENDLY,
       trail: [HOME, { name: "Contact" }],
     }) +
 
@@ -1171,7 +1025,7 @@ const contact = {
     '<div class="prose">' +
     "<h2>How to reach us</h2>" +
     answer(
-      "<strong>Email is the fastest route, and every button below opens a prefilled message.</strong> Most enquiries start with the free AI Visibility Audit, which needs three lines from you and returns a citation report within five business days. Replies come from a real inbox within one business day."
+      "<strong>The form on this page is the fastest route, and a 30-minute call is there if you prefer.</strong> Most enquiries start with the free AI Visibility Audit, which needs three lines from you and returns a citation report within five business days. Replies come from a real inbox within one business day."
     ) +
     "<h3>Pick the one that fits</h3>" +
     "<ul>" +
@@ -1184,15 +1038,9 @@ const contact = {
     "</div>" +
     "<div>" +
     '<div class="contact-panel">' +
-    "<h3>Request the free audit</h3>" +
-    "<p>Three lines of intake. A citation report across four AI engines within five business days. No call required.</p>" +
-    '<a class="btn big" href="' + AUDIT_MAILTO + '">Get Your Free Audit</a>' +
-    '<p class="field-note">Opens your email client with the three intake lines already filled in.</p>' +
-    "</div>" +
-    '<div class="contact-panel" style="margin-top:22px">' +
-    "<h3>Something else</h3>" +
-    "<p>A project, a question about scope, or a partnership. Same inbox, same one business day reply.</p>" +
-    '<a class="btn" href="' + mailto("Enquiry for Vivaan Marketing", ["Hi,", "", "Here is what I am trying to solve:", "", "", "Company website: ", "", "Thanks,"].join("\n")) + '">Send an enquiry</a>' +
+    "<h3>Send us a note</h3>" +
+    "<p>A project, a question about scope, or a partnership. For the free audit, use the <a href=\"/free-ai-visibility-audit/#request\">audit form</a>.</p>" +
+    leadForm("enquiry") +
     '<p class="field-note">Prefer LinkedIn? <a href="' + LINKEDIN + '" rel="me noopener">Message us there</a>.</p>' +
     "</div>" +
     "</div>" +
@@ -1204,6 +1052,23 @@ const contact = {
     "</div></section>" +
 
     ctaPanel("Still deciding?", "The audit answers the only question that matters right now: do AI engines cite you or your competitors?"),
+};
+
+// ---------- THANKS (form redirect target) ----------
+
+const thanks = {
+  path: "/thanks/",
+  noindex: true,
+  title: "Thanks, your request is in | Vivaan Marketing",
+  description: "Your request reached Vivaan Marketing. Expect a reply from a real inbox within one business day, and audit reports within five business days.",
+  body:
+    '<div class="page-hero"><div class="container"><div class="page-hero-inner">' +
+    '<p class="kicker">Received</p>' +
+    "<h1>Thanks, your request is in</h1>" +
+    '<p class="sub">You will hear back from a real inbox within one business day. Audit reports arrive within five business days.</p>' +
+    '<div class="cta-row"><a class="btn big" href="' + CALENDLY + '" rel="noopener">Book a 30-minute call</a>' +
+    '<a class="link-arrow" href="/results/">See results while you wait</a></div>' +
+    "</div></div></div>",
 };
 
 // ---------- 404 ----------
@@ -1227,9 +1092,8 @@ const notFound = {
       { href: "/services/answer-engine-optimization/", icon: "aeo", title: "Answer Engine Optimization", text: "Get quoted in ChatGPT and Perplexity answers.", go: "AEO services" },
       { href: "/services/generative-engine-optimization/", icon: "geo", title: "Generative Engine Optimization", text: "Win citations in Google AI Overviews and Gemini.", go: "GEO services" },
       { href: "/services/b2b-saas-seo/", icon: "seo", title: "B2B SaaS SEO", text: "Topical authority that compounds into pipeline.", go: "SaaS SEO" },
-      { href: "/services/content-writing/", icon: "write", title: "Content Writing", text: "Long-form written by senior B2B specialists.", go: "Content writing" },
       { href: "/services/content-marketing/", icon: "market", title: "Content Marketing", text: "Editorial calendars tied to revenue KPIs.", go: "Content marketing" },
-      { href: "/services/linkedin-personal-branding/", icon: "linkedin", title: "LinkedIn Personal Branding", text: "Founder presence, ghostwritten and consistent.", go: "LinkedIn branding" },
+      AUDIT_CARD,
     ]) +
     "</div></section>" +
     ctaPanel("While you are here", "The free AI Visibility Audit shows whether AI engines cite your brand or your competitors."),
@@ -1241,12 +1105,11 @@ export const pages = [
   aeo,
   geo,
   saasSeo,
-  contentWriting,
   contentMarketing,
-  linkedin,
   auditPage,
   results,
   about,
   contact,
+  thanks,
   notFound,
 ];

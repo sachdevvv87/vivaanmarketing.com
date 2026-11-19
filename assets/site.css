@@ -413,3 +413,24 @@
     color: var(--indigo); margin: 10px 0 0;
   }
   .brand svg { flex: none; }
+
+  /* Lead form (FormSubmit) */
+  .link-arrow.on-grad { color: #fff; }
+  .link-arrow.on-grad:hover { color: #EAF3FD; }
+  .lead-form { display: grid; gap: 14px; }
+  .lead-form .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .lead-form .field { display: grid; gap: 6px; font-size: 14px; font-weight: 600; color: var(--ink); }
+  .lead-form .field em { font-style: normal; font-weight: 500; color: var(--body); }
+  .lead-form input, .lead-form textarea {
+    font: inherit; font-weight: 400; font-size: 15px; color: var(--ink);
+    background: var(--white); border: 1px solid var(--line); border-radius: 10px;
+    padding: 11px 13px; width: 100%; box-sizing: border-box;
+  }
+  .lead-form input:focus, .lead-form textarea:focus { outline: 2px solid var(--indigo); outline-offset: 1px; border-color: transparent; }
+  .lead-form .btn { justify-self: start; border: 0; cursor: pointer; }
+  .lead-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .form-card { background: var(--ground); border: 1px solid var(--line); border-radius: 16px; padding: 30px; max-width: 640px; }
+  .form-card h3 { margin: 0 0 6px; font-size: 20px; }
+  .form-card > p { font-size: 15px; color: var(--body); margin: 0 0 20px; }
+  @media (max-width: 620px) { .lead-form .field-row { grid-template-columns: 1fr; } .form-card { padding: 22px; } }
+  [id] { scroll-margin-top: 96px; }

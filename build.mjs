@@ -4,7 +4,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { render, SITE, BRAND, EMAIL, LINKEDIN } from "./src/layout.mjs";
+import { render, SITE, BRAND, EMAIL, LINKEDIN, CALENDLY, FOUNDER_SITE } from "./src/layout.mjs";
 import { pages } from "./src/content.mjs";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
@@ -26,8 +26,34 @@ const PRIORITY = {
   "/about/": "0.6",
 };
 
+// Services that moved to the founder's site. GitHub Pages cannot send a 301,
+// so each old route gets a noindex page with a canonical and an instant refresh.
+const REDIRECTS = {
+  "/services/content-writing/": FOUNDER_SITE + "/services/content-writing.html",
+  "/services/linkedin-personal-branding/": FOUNDER_SITE + "/services/linkedin-branding.html",
+};
+
+function redirectHtml(to) {
+  return (
+    "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n" +
+    "<title>This service has moved</title>\n" +
+    '<meta name="robots" content="noindex, follow">\n' +
+    '<link rel="canonical" href="' + to + '">\n' +
+    '<meta http-equiv="refresh" content="0; url=' + to + '">\n' +
+    "</head>\n<body>\n" +
+    '<p>This service has moved to <a href="' + to + '">' + to + "</a>.</p>\n" +
+    "</body>\n</html>\n"
+  );
+}
+
 async function build() {
   const written = [];
+
+  for (const [from, to] of Object.entries(REDIRECTS)) {
+    const out = outPathFor(from);
+    await mkdir(dirname(out), { recursive: true });
+    await writeFile(out, redirectHtml(to), "utf8");
+  }
 
   for (const page of pages) {
     const html = render(page);
@@ -78,16 +104,17 @@ async function build() {
   const svc = pages.filter((p) => p.path.startsWith("/services/") && p.path !== "/services/");
   const llms =
     "# " + BRAND + "\n\n" +
-    "> B2B SaaS marketing agency specialising in AI search visibility. We make brands the source that ChatGPT, Google AI Overviews, Perplexity, Gemini and Claude cite when buyers ask about their category, backed by SEO, content and LinkedIn programmes.\n\n" +
+    "> B2B SaaS marketing agency specialising in AI search visibility. We make brands the source that ChatGPT, Google AI Overviews, Perplexity, Gemini and Claude cite when buyers ask about their category, backed by SEO and content marketing programmes.\n\n" +
     "Based in Ahmedabad, India. Serving B2B technology companies in the United States, United Kingdom, Canada, Australia and India. Contact: " + EMAIL + "\n\n" +
     "## Key facts\n\n" +
     "- Founded 2024. Six or more years of B2B technology content and search experience behind the team.\n" +
     "- Over 50 SaaS and enterprise brands served, including JungleWorks, Testlify, Scalenut, Pepper Content, MultiQoS and INTECH.\n" +
     "- More than 500 long-form articles published and ranking.\n" +
     "- Average 3x growth in AI citations for clients. One client moved from zero to eleven AI-cited keywords in six months.\n" +
-    "- 200,000+ organic LinkedIn views ghostwritten for technology executives.\n" +
+    "- 200,000+ organic LinkedIn views ghostwritten for technology executives (by the founder).\n" +
     "- Forbes Technology Council contributor. HubSpot certified.\n" +
-    "- Delivery is asynchronous by default. No call is required to receive the free audit.\n\n" +
+    "- Delivery is asynchronous by default. No call is required to receive the free audit. A 30-minute call can be booked at " + CALENDLY + "\n" +
+    "- Content writing and LinkedIn ghostwriting are offered by the founder directly at " + FOUNDER_SITE + "\n\n" +
     "## Definitions we use\n\n" +
     "- **Answer Engine Optimization (AEO)**: structuring content so AI answer engines can extract, understand and cite it directly. Page-level and on-site.\n" +
     "- **Generative Engine Optimization (GEO)**: shaping how AI models understand, describe and recommend a brand, through entity clarity, schema and third-party corroboration. Brand-level and largely off-site.\n" +
@@ -95,7 +122,7 @@ async function build() {
     "## Services\n\n" +
     svc.map((p) => "- [" + p.title.split("|")[0].trim() + "](" + SITE + p.path + "): " + p.description).join("\n") +
     "\n\n## Offers\n\n" +
-    "- **Free AI Visibility Audit** (0 USD): citation map across ChatGPT, Perplexity, Google AI Overviews and Gemini, brand description check, competitor citation analysis, structural diagnosis and a prioritised fix list. Intake is three lines. Delivered by email within five business days. No call required.\n" +
+    "- **Free AI Visibility Audit** (0 USD): citation map across ChatGPT, Perplexity, Google AI Overviews and Gemini, brand description check, competitor citation analysis, structural diagnosis and a prioritised fix list. Intake is a three-line form at " + SITE + "/free-ai-visibility-audit/#request. Delivered by email within five business days. No call required.\n" +
     "- **Monthly programmes** (2,000 to 6,000 USD per month): scoped to the services the audit justifies, month to month, with a monthly citation and pipeline report against the audit baseline.\n\n" +
     "## Pages\n\n" +
     indexable.map((p) => "- [" + p.title.split("|")[0].trim() + "](" + SITE + p.path + "): " + p.description).join("\n") +

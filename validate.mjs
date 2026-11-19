@@ -25,6 +25,7 @@ for (const f of files) {
   routes.add(rel === "/index.html" ? "/" : rel.replace(/index\.html$/, ""));
 }
 
+const noindex = new Set();
 const titles = new Map();
 const descs = new Map();
 
@@ -39,6 +40,8 @@ for (const f of files) {
   const canon = tag(/<link rel="canonical" href="([^"]*)"/);
   const h1s = html.match(/<h1[^>]*>/g) || [];
 
+  if (html.includes('content="noindex')) noindex.add(rel === "/index.html" ? "/" : rel.replace(/index\.html$/, ""));
+  if (html.includes('http-equiv="refresh"')) continue; // moved-service stub, see REDIRECTS in build.mjs
   if (!title) problems.push(rel + ": missing <title>");
   if (!desc) problems.push(rel + ": missing meta description");
   if (!canon) problems.push(rel + ": missing canonical");
@@ -108,7 +111,7 @@ for (const a of ["assets/site.css", "assets/fonts/inter-latin.woff2", "assets/fa
 // --- sitemap covers every indexable route ---
 const sitemap = await readFile(join(ROOT, "sitemap.xml"), "utf8");
 for (const r of routes) {
-  if (r.endsWith("404.html")) continue;
+  if (r.endsWith("404.html") || noindex.has(r)) continue;
   if (!sitemap.includes("<loc>" + SITE + r + "</loc>")) problems.push("Sitemap missing route: " + r);
 }
 const robots = await readFile(join(ROOT, "robots.txt"), "utf8");
