@@ -1014,7 +1014,7 @@ const contact = {
     pageHero({
       kicker: "Contact",
       h1: "Tell us what is not working",
-      sub: "One short form, one business day, one real reply. Or book a 30-minute call if you would rather talk.",
+      sub: "One short note, one business day, one real reply. Or book a 30-minute call if you would rather talk.",
       ctaLabel: "Book a 30-minute call",
       ctaHref: CALENDLY,
       trail: [HOME, { name: "Contact" }],
@@ -1025,7 +1025,7 @@ const contact = {
     '<div class="prose">' +
     "<h2>How to reach us</h2>" +
     answer(
-      "<strong>The form on this page is the fastest route, and a 30-minute call is there if you prefer.</strong> Most enquiries start with the free AI Visibility Audit, which needs three lines from you and returns a citation report within five business days. Replies come from a real inbox within one business day."
+      "<strong>A short note or a 30-minute call are the fastest routes.</strong> Most enquiries start with the free AI Visibility Audit, which needs three lines from you and returns a citation report within five business days. Replies come from a real inbox within one business day."
     ) +
     "<h3>Pick the one that fits</h3>" +
     "<ul>" +
@@ -1039,7 +1039,7 @@ const contact = {
     "<div>" +
     '<div class="contact-panel">' +
     "<h3>Send us a note</h3>" +
-    "<p>A project, a question about scope, or a partnership. For the free audit, use the <a href=\"/free-ai-visibility-audit/#request\">audit form</a>.</p>" +
+    "<p>A project, a question about scope, or a partnership. For the free audit, use the <a href=\"/free-ai-visibility-audit/#request\">audit page</a>.</p>" +
     leadForm("enquiry") +
     '<p class="field-note">Prefer LinkedIn? <a href="' + LINKEDIN + '" rel="me noopener">Message us there</a>.</p>' +
     "</div>" +

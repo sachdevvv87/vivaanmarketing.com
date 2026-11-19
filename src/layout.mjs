@@ -8,9 +8,13 @@ export const CALENDLY = "https://calendly.com/devmurari-sachin87/new-meeting";
 // The founder's own site. Writing and LinkedIn ghostwriting are sold there, not here.
 export const FOUNDER_SITE = "https://sachindevmurari.com";
 export const AUDIT_URL = "/free-ai-visibility-audit/#request";
-// FormSubmit relays posts to EMAIL with no account. The first submission sends a
-// one-time activation email to that inbox; nothing is delivered until it is clicked.
-export const FORM_ACTION = "https://formsubmit.co/" + EMAIL;
+// Formspree form ID (the part after formspree.io/f/). While empty, every form
+// renders as a Calendly button plus an email link instead.
+export const FORMSPREE_ID = "";
+
+export function mailto(subject, body) {
+  return "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+}
 
 export const NAV_SERVICES = [
   ["/services/answer-engine-optimization/", "Answer Engine Optimization", "Get quoted in ChatGPT and Perplexity answers"],
@@ -354,23 +358,32 @@ export function secHead(overline, h2, p, wide) {
   );
 }
 
-// Lead form. Posts to FormSubmit, which emails EMAIL and redirects to /thanks/.
+// Lead form. Posts to Formspree with fetch so the free plan can still land on
+// /thanks/; without JavaScript it falls back to a normal POST.
 // kind = "audit" asks for the three intake lines; anything else is a general enquiry.
 export function leadForm(kind) {
   const audit = kind === "audit";
+  if (!FORMSPREE_ID) {
+    const href = audit
+      ? mailto("Free AI Visibility Audit request", "Hi,\n\nI would like the free AI Visibility Audit.\n\n1. Website: \n2. Category (how buyers describe what we sell): \n3. Top three competitors: \n\nThanks,")
+      : mailto("Enquiry for Vivaan Marketing", "Hi,\n\nHere is what I am trying to solve:\n\n\nCompany website: \n\nThanks,");
+    return (
+      '<div class="cta-row"><a class="btn big" href="' + CALENDLY + '" rel="noopener">Book a 30-minute call</a>' +
+      '<a class="link-arrow" href="' + href + '">' + (audit ? "Or email the three lines" : "Or send an email") + "</a></div>" +
+      '<p class="field-note">Replies within one business day, from a real inbox.</p>'
+    );
+  }
   const f = (name, label, type, req, ph) =>
     '<label class="field"><span>' + label + (req ? "" : ' <em>(optional)</em>') + "</span>" +
     (type === "textarea"
       ? '<textarea name="' + name + '" rows="4"' + (req ? " required" : "") + (ph ? ' placeholder="' + ph + '"' : "") + "></textarea>"
       : '<input type="' + type + '" name="' + name + '"' + (req ? " required" : "") + (ph ? ' placeholder="' + ph + '"' : "") +
-        (type === "email" ? ' autocomplete="email"' : name === "name" ? ' autocomplete="name"' : type === "url" ? ' autocomplete="url"' : "") + ">") +
+        (type === "email" ? ' autocomplete="email"' : name === "name" ? ' autocomplete="name"' : "") + ">") +
     "</label>";
   return (
-    '<form class="lead-form" action="' + FORM_ACTION + '" method="POST">' +
+    '<form class="lead-form" id="leadForm" action="https://formspree.io/f/' + FORMSPREE_ID + '" method="POST">' +
     '<input type="hidden" name="_subject" value="' + (audit ? "New free audit request" : "New enquiry") + ' (vivaanmarketing.com)">' +
-    '<input type="hidden" name="_next" value="' + SITE + '/thanks/">' +
-    '<input type="hidden" name="_template" value="table">' +
-    '<input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+    '<input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">' +
     '<div class="field-row">' + f("name", "Your name", "text", true) + f("email", "Work email", "email", true) + "</div>" +
     f("website", "Company website", "text", true, "yourcompany.com") +
     (audit
@@ -378,7 +391,12 @@ export function leadForm(kind) {
         f("competitors", "Top three competitors", "text", false, "competitor-a.com, competitor-b.com")
       : f("message", "What are you trying to solve?", "textarea", true)) +
     '<button class="btn big" type="submit">' + (audit ? "Request my free audit" : "Send enquiry") + "</button>" +
-    '<p class="field-note">Replies within one business day. Prefer to talk? <a href="' + CALENDLY + '" rel="noopener">Book a 30-minute call</a>.</p>' +
-    "</form>"
+    '<p class="field-note" id="leadStatus" role="status">Replies within one business day. Prefer to talk? <a href="' + CALENDLY + '" rel="noopener">Book a 30-minute call</a>.</p>' +
+    "</form>" +
+    '<script>(function(){var f=document.getElementById("leadForm"),s=document.getElementById("leadStatus");' +
+    'f.addEventListener("submit",function(e){e.preventDefault();var b=f.querySelector("button");b.disabled=true;' +
+    'fetch(f.action,{method:"POST",body:new FormData(f),headers:{Accept:"application/json"}}).then(function(r){' +
+    'if(r.ok){location.href="/thanks/";}else{throw 0;}}).catch(function(){b.disabled=false;' +
+    's.innerHTML="That did not go through. Please email <a href=\\"mailto:' + EMAIL + '\\">' + EMAIL + '</a> or <a href=\\"' + CALENDLY + '\\">book a call</a>.";});});})();</script>'
   );
 }
