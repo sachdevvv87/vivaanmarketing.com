@@ -10,7 +10,7 @@ export const FOUNDER_SITE = "https://sachindevmurari.com";
 export const AUDIT_URL = "/free-ai-visibility-audit/#request";
 // Formspree form ID (the part after formspree.io/f/). While empty, every form
 // renders as a Calendly button plus an email link instead.
-export const FORMSPREE_ID = "";
+export const FORMSPREE_ID = "xqpqbvwy";
 
 export function mailto(subject, body) {
   return "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
@@ -396,7 +396,8 @@ export function leadForm(kind) {
     '<script>(function(){var f=document.getElementById("leadForm"),s=document.getElementById("leadStatus");' +
     'f.addEventListener("submit",function(e){e.preventDefault();var b=f.querySelector("button");b.disabled=true;' +
     'fetch(f.action,{method:"POST",body:new FormData(f),headers:{Accept:"application/json"}}).then(function(r){' +
-    'if(r.ok){location.href="/thanks/";}else{throw 0;}}).catch(function(){b.disabled=false;' +
-    's.innerHTML="That did not go through. Please email <a href=\\"mailto:' + EMAIL + '\\">' + EMAIL + '</a> or <a href=\\"' + CALENDLY + '\\">book a call</a>.";});});})();</script>'
+    'if(r.ok){location.href="/thanks/";return;}return r.json().then(function(d){' +
+    'var m=d&&d.errors?d.errors.map(function(x){return x.message;}).join(". "):"";throw m;});}).catch(function(m){b.disabled=false;' +
+    's.innerHTML=(typeof m==="string"&&m?m+". Please fix that and try again, or email":"That did not go through. Please email")+" <a href=\\"mailto:' + EMAIL + '\\">' + EMAIL + '</a> or <a href=\\"' + CALENDLY + '\\">book a call</a>.";});});})();</script>'
   );
 }
