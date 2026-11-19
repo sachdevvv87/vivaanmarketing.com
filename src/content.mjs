@@ -9,7 +9,7 @@ const SERVICES = { name: "Services", url: "/services/" };
 // ---------- shared fragments ----------
 
 const STATS = [
-  ["3x", "Average growth in AI citations for clients"],
+  ["0 to 11", "AI-cited keywords for a SaaS client in six months"],
   ["50+", "SaaS and enterprise brands served globally"],
   ["500+", "Long-form articles published and ranking"],
   ["6+ yrs", "In B2B tech content and search"],
@@ -482,7 +482,7 @@ const aeo = servicePage({
   proofH2: "What this has produced",
   proof: [
     ["0 to 11", "AI-cited keywords in six months", "A B2B SaaS client went from no AI citations at all to eleven buyer-intent queries naming them directly.", "AEO programme"],
-    ["3x", "Average AI citation growth", "Across client accounts running answer engine optimization as a core service.", "Client average"],
+    ["500+", "Long-form articles published", "Six years of B2B tech writing behind every answer block we structure.", "Content track record"],
   ],
   faqs: [
     { q: "Is AEO just SEO with a new name?", a: "No. They share a foundation of crawlable, credible content, but the optimisation targets differ. SEO optimises a page for a ranking position. AEO optimises a passage for extraction and attribution. Pages that rank first are frequently not the pages that get cited, which is exactly the gap this work closes." },
@@ -555,7 +555,7 @@ const geo = servicePage({
   ],
   proofH2: "What this has produced",
   proof: [
-    ["3x", "Average growth in AI citations", "Across accounts where GEO ran alongside answer engine optimization.", "Client average"],
+    ["0 to 11", "AI-cited keywords in six months", "A B2B SaaS client went from no AI citations to eleven buyer-intent queries where engines name them directly.", "AI visibility programme"],
     ["Forbes", "Technology Council contributor", "The kind of third-party corroboration that models weight heavily when deciding whom to name.", "Authority signal"],
   ],
   faqs: [

@@ -110,7 +110,7 @@ async function build() {
     "- Founded 2024. Six or more years of B2B technology content and search experience behind the team.\n" +
     "- Over 50 SaaS and enterprise brands served, including JungleWorks, Testlify, Scalenut, Pepper Content, MultiQoS and INTECH.\n" +
     "- More than 500 long-form articles published and ranking.\n" +
-    "- Average 3x growth in AI citations for clients. One client moved from zero to eleven AI-cited keywords in six months.\n" +
+    "- One client moved from zero to eleven AI-cited keywords in six months.\n" +
     "- 200,000+ organic LinkedIn views ghostwritten for technology executives (by the founder).\n" +
     "- Forbes Technology Council contributor. HubSpot certified.\n" +
     "- Delivery is asynchronous by default. No call is required to receive the free audit. A 30-minute call can be booked at " + CALENDLY + "\n" +
